@@ -13,19 +13,21 @@ export const Board = ({ orders, status }: BoardProps) => {
       <header>
         <span>{statusIcon(status)}</span>
         <strong>{status}</strong>
-        <span>(1)</span>
+        <span>{`(${orders.length})`}</span>
       </header>
 
-      <OrdersContainer>
-        {orders.map(({ id, products, table }) => {
-          return (
-            <button type='button' key={id}>
-              <strong>{`Mesa ${table}`}</strong>
-              <span>{`${products.length} itens`}</span>
-            </button>
-          )
-        })}
-      </OrdersContainer>
+      {orders.length > 0 && (
+        <OrdersContainer>
+          {orders.map(({ id, products, table }) => {
+            return (
+              <button type='button' key={id}>
+                <strong>{`Mesa ${table}`}</strong>
+                <span>{`${products.length} itens`}</span>
+              </button>
+            )
+          })}
+        </OrdersContainer>
+      )}
     </IBoard>
   )
 }

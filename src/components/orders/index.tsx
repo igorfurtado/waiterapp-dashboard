@@ -53,14 +53,30 @@ const ordersMock: OrderFromDomain[] = [
 
 const orderView = orderMapper(ordersMock)
 
+const waitingOrders = orderView.filter(
+  (order) => order.status === 'Fila de espera'
+)
+
+// const inProductionOrders = orderView.filter(
+//   (order) => order.status === 'Em preparação'
+// )
+
+// const doneOrders = orderView.filter((order) => order.status === '')
+
 const Orders = () => {
   return (
     <Container>
-      {orderView.map((order) => {
+      {waitingOrders.map((order) => {
         return (
-          <Board status={order.status} orders={orderView} key={order.id} />
+          <Board
+            status='Fila de espera'
+            orders={waitingOrders}
+            key={order.id}
+          />
         )
       })}
+      <Board status='Em preparação' orders={[]} />
+      <Board status='Pronto!' orders={[]} />
     </Container>
   )
 }
