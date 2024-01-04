@@ -1,24 +1,30 @@
+import { Order } from '../model/data/order'
 import { IBoard, OrdersContainer } from '../styles'
+import { statusIcon } from '../utils/status-management'
 
-export const Board = () => {
+type BoardProps = {
+  status: 'Pronto!' | 'Em preparação' | 'Fila de espera'
+  orders: Order[]
+}
+
+export const Board = ({ orders, status }: BoardProps) => {
   return (
     <IBoard>
       <header>
-        <span>🕒</span>
-        <strong>Fila de espera</strong>
+        <span>{statusIcon(status)}</span>
+        <strong>{status}</strong>
         <span>(1)</span>
       </header>
 
       <OrdersContainer>
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-
-        <button type='button'>
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
+        {orders.map(({ id, products, table }) => {
+          return (
+            <button type='button' key={id}>
+              <strong>{`Mesa ${table}`}</strong>
+              <span>{`${products.length} itens`}</span>
+            </button>
+          )
+        })}
       </OrdersContainer>
     </IBoard>
   )
