@@ -1,16 +1,14 @@
-
 # Waiter App Dashboard
 
 Front-end Web da aplicação WaiterApp, criado com React + Vite e Typescript. 
+
+![Logo](https://github.com/igorfurtado/waiterapp-dashboard/assets/70289587/7ff72d10-59f2-40f5-b107-d59a7d7f5115)
 
 Esta interface permite as seguintes ações:
 - Login do usuário;
 - Visualização de histórico de pedidos;
 - Visualização de cardápios e de produtos;
 - Gerenciamento dos dados do usuário.
-
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
 
 ## Documentação de cores
 
