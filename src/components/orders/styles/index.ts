@@ -22,7 +22,7 @@ export const IBoard = styled.div`
   border: 1px solid rgba(204, 204, 204, 0.4);
   border-radius: 16px;
 
-  header {
+  > header {
     padding: 8px;
     font-size: 14px;
     display: flex;

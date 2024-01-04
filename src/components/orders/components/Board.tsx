@@ -1,6 +1,8 @@
+import useOrders from '../hooks/use-orders'
 import { Order } from '../model/data/order'
 import { IBoard, OrdersContainer } from '../styles'
 import { statusIcon } from '../utils/status-management'
+import OrderModal from './modal'
 
 type BoardProps = {
   status: 'Pronto!' | 'Em preparação' | 'Fila de espera'
@@ -8,8 +10,16 @@ type BoardProps = {
 }
 
 export const Board = ({ orders, status }: BoardProps) => {
+  const { isModalVisible, selectedOrder, handleModal } = useOrders()
+
   return (
     <IBoard>
+      <OrderModal
+        visible={isModalVisible}
+        selectedOrder={selectedOrder}
+        handleModal={handleModal}
+      />
+
       <header>
         <span>{statusIcon(status)}</span>
         <strong>{status}</strong>
@@ -18,11 +28,15 @@ export const Board = ({ orders, status }: BoardProps) => {
 
       {orders.length > 0 && (
         <OrdersContainer>
-          {orders.map(({ id, products, table }) => {
+          {orders.map((order) => {
             return (
-              <button type='button' key={id}>
-                <strong>{`Mesa ${table}`}</strong>
-                <span>{`${products.length} itens`}</span>
+              <button
+                type='button'
+                key={order.id}
+                onClick={() => handleModal(true, order)}
+              >
+                <strong>{`Mesa ${order.table}`}</strong>
+                <span>{`${order.products.length} itens`}</span>
               </button>
             )
           })}
