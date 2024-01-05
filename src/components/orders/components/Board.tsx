@@ -37,7 +37,7 @@ export const Board = ({ orders, status }: BoardProps) => {
               >
                 <strong>{`Mesa ${order.table}`}</strong>
                 <span>{`${order.products.length} ${
-                  order.products.length > 1 ? 'itens' : 'item'
+                  order.products.length === 1 ? 'item' : 'itens'
                 }`}</span>
               </button>
             )
