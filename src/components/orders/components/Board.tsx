@@ -36,7 +36,9 @@ export const Board = ({ orders, status }: BoardProps) => {
                 onClick={() => handleModal(true, order)}
               >
                 <strong>{`Mesa ${order.table}`}</strong>
-                <span>{`${order.products.length} itens`}</span>
+                <span>{`${order.products.length} ${
+                  order.products.length > 1 ? 'itens' : 'item'
+                }`}</span>
               </button>
             )
           })}

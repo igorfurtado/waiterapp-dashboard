@@ -1,5 +1,6 @@
 import closeIcon from '@/assets/images/close-icon.svg'
 import { Order } from '../../model/data/order'
+import { statusIcon } from '../../utils/status-management'
 import { ModalBody, OrderDetails, Overlay } from './styles'
 
 type OrderModalProps = {
@@ -13,7 +14,7 @@ const OrderModal = ({
   selectedOrder,
   handleModal
 }: OrderModalProps) => {
-  if (!visible) {
+  if (!visible || !selectedOrder) {
     return null
   }
 
@@ -21,7 +22,7 @@ const OrderModal = ({
     <Overlay>
       <ModalBody>
         <header>
-          <strong>Mesa 2</strong>
+          <strong>Mesa {selectedOrder.table}</strong>
           <button type='button' onClick={() => handleModal(false, null)}>
             <img src={closeIcon} alt='Ícone de Fechar' />
           </button>
@@ -30,8 +31,10 @@ const OrderModal = ({
         <div className='status-container'>
           <small>Status do Pedido</small>
           <div>
-            <span>🕒</span>
-            <strong>Fila de Espera</strong>
+            <span>
+              {selectedOrder?.status ? statusIcon(selectedOrder?.status) : null}
+            </span>
+            <strong>{selectedOrder?.status}</strong>
           </div>
         </div>
 
