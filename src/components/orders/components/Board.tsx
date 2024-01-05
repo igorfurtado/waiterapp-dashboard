@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import useOrders from '../hooks/use-orders'
 import { Order } from '../model/data/order'
 import { IBoard, OrdersContainer } from '../styles'
@@ -11,6 +12,18 @@ type BoardProps = {
 
 export const Board = ({ orders, status }: BoardProps) => {
   const { isModalVisible, selectedOrder, handleModal } = useOrders()
+
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleModal(false, null)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown)
+
+    return () => document.removeEventListener('keydown', handleKeydown)
+  }, [handleModal])
 
   return (
     <IBoard>
